@@ -4,6 +4,8 @@
 
 **在线体验：https://yuhan9988.github.io/pelican-ride/**
 
+English: https://yuhan9988.github.io/pelican-ride/?lang=en
+
 ![鹈鹕骑车](og.png)
 
 ## 玩法
