@@ -37,6 +37,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html, body { height: 100%; margin: 0; }
 body { overflow: hidden; background: var(--ink); color: var(--fg); font-family: var(--sans); font-size: 14px; -webkit-font-smoothing: antialiased; }
 #scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
@@ -152,7 +153,7 @@ html[lang="en"] .splash h2 { font-size: clamp(34px, 7vw, 54px); letter-spacing: 
 .btn.pri:hover { filter: brightness(1.06); }
 .btn.sec { background: rgba(255,255,255,.1); border: 1px solid var(--line); }
 .btn.sec:hover { background: rgba(255,255,255,.16); }
-.keys { margin: 24px 0 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 8px; font-size: 12px; color: var(--muted); }
+.keys { margin: 24px 0 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px 8px; font-size: 12px; color: var(--muted); }
 .keys div { display: grid; justify-items: center; gap: 6px; }
 .author { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
 .author a { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 10px; border-radius: 999px; text-decoration: none; color: var(--fg); background: rgba(255,255,255,.08); border: 1px solid var(--line); }
@@ -163,14 +164,42 @@ html[lang="en"] .splash h2 { font-size: clamp(34px, 7vw, 54px); letter-spacing: 
 
 .toast { position: fixed; left: 50%; top: 30%; transform: translate(-50%, -50%) scale(.85); padding: 10px 22px; border-radius: 999px; font-size: 18px; font-weight: 700; opacity: 0; pointer-events: none; transition: opacity .25s, transform .4s cubic-bezier(.2,1.5,.4,1); white-space: nowrap; background: var(--glass-strong); border: 1px solid var(--line); z-index: 6; }
 .toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.ach-toast { position: fixed; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 92px); transform: translate(-50%, -20px); display: flex; align-items: center; gap: 12px; padding: 10px 18px 10px 10px; opacity: 0; pointer-events: none; transition: opacity .3s, transform .45s cubic-bezier(.2,1.4,.4,1); background: var(--glass-strong); z-index: 6; max-width: calc(100% - 32px); }
+.ach-toast { position: fixed; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 172px); transform: translate(-50%, -20px); display: flex; align-items: center; gap: 12px; padding: 10px 18px 10px 10px; opacity: 0; pointer-events: none; transition: opacity .3s, transform .45s cubic-bezier(.2,1.4,.4,1); background: var(--glass-strong); z-index: 6; max-width: calc(100% - 32px); }
 .ach-toast.show { opacity: 1; transform: translate(-50%, 0); }
 .ach-toast .badge { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(160deg, #ffd88f, #ff9a5c); color: #3a1d0c; flex: none; }
 .ach-toast small { display: block; font-size: 11px; letter-spacing: .14em; color: var(--sun); }
 .ach-toast b { font-size: 15px; }
 .fail { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--muted); z-index: 20; background: var(--ink); line-height: 1.8; }
 
-@media (max-width: 1180px) { .hints { display: none; } }
+@media (max-width: 1720px) { .hints { display: none; } }
+a.btn { text-decoration: none; }
+.recpill { position: fixed; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 92px); transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 8px 14px; font-family: var(--num); font-weight: 600; z-index: 7; font-variant-numeric: tabular-nums; }
+.recpill i { width: 10px; height: 10px; border-radius: 50%; background: #ff4d4d; animation: recblink 1s infinite; }
+@keyframes recblink { 50% { opacity: .25; } }
+.tools button.recording { color: #ff7a7a; background: rgba(255, 80, 80, .16); }
+.chalbar { position: absolute; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 92px); transform: translateX(-50%); display: flex; align-items: center; gap: 22px; padding: 10px 22px; }
+.chalbar .tm { font-family: var(--num); font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 2.2em; text-align: center; }
+.chalbar .tm.low { color: #ff8a7a; }
+.chalbar .lbl small { display: block; font-size: 11px; color: var(--muted); letter-spacing: .12em; }
+.chalbar .lbl b { font-family: var(--num); font-size: 24px; font-variant-numeric: tabular-nums; }
+.chalbar .combo b { color: var(--sun); }
+.chalbtn { background: linear-gradient(180deg, #ffd88f, #ffab55); color: #3a1d0c; font-weight: 700; border-radius: 12px; padding: 9px 14px; font-size: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; }
+.chalbtn kbd { color: #3a1d0c; background: rgba(255,255,255,.35); border-color: rgba(58,29,12,.25); }
+.chalbtn:hover { filter: brightness(1.06); }
+.result { position: fixed; inset: 0; z-index: 9; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 16px); background: rgba(20, 10, 30, .5); overflow: auto; }
+.result .card { width: 100%; max-width: 620px; min-width: 0; padding: 26px; text-align: center; background: rgba(30, 18, 44, .82); }
+.result .rank { color: var(--sun); letter-spacing: .2em; font-size: 13px; font-weight: 700; }
+.result .score { font-family: var(--num); font-size: 88px; font-weight: 700; line-height: 1; margin: 6px 0 4px; background: linear-gradient(180deg, #fff6e6, #ffc27a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.result .best { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+.result .best.new { color: var(--sun); font-weight: 700; }
+.result .rows { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; color: var(--muted); font-size: 12px; margin-bottom: 14px; }
+.result .rows b { display: block; color: var(--fg); font-family: var(--num); font-size: 24px; }
+.result img { width: 100%; border-radius: 12px; border: 1px solid var(--line); display: block; margin: 4px 0 16px; aspect-ratio: 1200 / 630; object-fit: cover; background: rgba(255,255,255,.05); }
+.result .go { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.result .note { margin-top: 12px; font-size: 12px; color: var(--muted); }
+.credit { margin-top: 12px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+.credit a { color: var(--fg); }
+body.hide-ui .chalbar { opacity: 0; }
 @media (max-width: 900px) {
   .top { flex-wrap: wrap; }
   .cams { order: 3; width: 100%; overflow-x: auto; scrollbar-width: none; }
@@ -198,6 +227,14 @@ html[lang="en"] .splash h2 { font-size: clamp(34px, 7vw, 54px); letter-spacing: 
   .splash .card { padding: 26px 18px 20px; }
 }
 @media (max-width: 560px) {
+  .chalbar { top: calc(env(safe-area-inset-top, 0px) + 218px); gap: 14px; padding: 8px 16px; }
+  .ach-toast { top: calc(env(safe-area-inset-top, 0px) + 290px); }
+  .chalbar .tm { font-size: 24px; }
+  .chalbar .lbl b { font-size: 18px; }
+  .chalbtn { padding: 6px 8px; font-size: 12px; }
+  .chalbtn kbd { display: none; }
+  .result .score { font-size: 64px; }
+  .keys { grid-template-columns: repeat(2, 1fr); }
   .dial { width: 74px; height: 74px; }
   .dial .val b { font-size: 24px; }
   .dial .val small { font-size: 9px; }
@@ -246,6 +283,7 @@ html[lang="en"] .splash h2 { font-size: clamp(34px, 7vw, 54px); letter-spacing: 
       <button data-cam="pov" aria-pressed="false" data-i18n="cam_pov">鹈鹕视角</button>
     </nav>
     <div class="glass tools">
+      <button id="tRec" title="录制 15 秒视频" aria-label="录制 15 秒视频" data-i18n-title="t_rec"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2.5"/><path d="M16 10.5l5-3v9l-5-3"/></svg></button>
       <button id="tPhoto" title="拍照（带水印）" aria-label="拍照" data-i18n-title="t_photo"><svg class="i" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></button>
       <button id="tLang" title="切换语言" aria-label="切换语言" data-i18n-title="t_lang" style="font-family:var(--num);font-weight:700;font-size:13px">EN</button>
       <button id="tMusic" title="背景音乐" aria-label="背景音乐" aria-pressed="false" data-i18n-title="t_music"><svg class="i" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg></button>
@@ -284,22 +322,31 @@ html[lang="en"] .splash h2 { font-size: clamp(34px, 7vw, 54px); letter-spacing: 
     <span><kbd>B</kbd> <i data-i18n="h_bell" style="font-style:normal">铃</i></span>
     <span><kbd>C</kbd> <i data-i18n="h_cam" style="font-style:normal">镜头</i></span>
     <span><kbd>U</kbd> <i data-i18n="h_hide" style="font-style:normal">隐藏界面</i></span>
+    <span><kbd>G</kbd> <i data-i18n="h_chal" style="font-style:normal">挑战</i></span>
+    <span><kbd>R</kbd> <i data-i18n="h_rec" style="font-style:normal">录像</i></span>
   </div>
 
   <section class="glass catch" aria-label="渔获与时间">
     <div class="row">
       <div class="fishcount" title="接到的鱼"><svg aria-hidden="true"><use href="#i-fish"/></svg><b id="vFish">0</b></div>
-      <button class="achbtn" id="tAch" aria-label="查看成就"><small data-i18n="badges">成就</small><b id="vAch">0/15</b></button>
+      <button class="achbtn" id="tAch" aria-label="查看成就"><small data-i18n="badges">成就</small><b id="vAch">0/18</b></button>
     </div>
     <div class="timebar">
       <svg class="sunic i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       <input id="tod" type="range" min="0" max="24" step="0.01" value="17.85" aria-label="一天中的时间">
       <output id="vTime" for="tod">17:51</output>
     </div>
+    <button class="chalbtn" id="btnChal"><svg class="i" viewBox="0 0 24 24"><use href="#i-trophy"/></svg><span data-i18n="chal_btn">挑战 60 秒</span><kbd>G</kbd></button>
   </section>
 
+  <div class="glass chalbar" id="chalBar" hidden>
+    <div class="tm" id="cTime">60</div>
+    <div class="lbl"><small data-i18n="c_score">得分</small><b id="cScore">0</b></div>
+    <div class="lbl combo"><small data-i18n="c_combo">连击</small><b id="cCombo">×1</b></div>
+  </div>
+
   <div class="steer"><button class="glass" id="sL" aria-label="向左变道">◀</button><button class="glass" id="sR" aria-label="向右变道">▶</button></div>
-  <div class="touch"><button class="glass" id="bTrick" aria-label="特技"><span data-i18n="b_trick">技</span></button><button class="glass pri" id="bJump" aria-label="跳"><span data-i18n="b_jump">跳</span></button><button class="glass pri" id="bFish" aria-label="接鱼"><span data-i18n="b_fish">鱼</span></button></div>
+  <div class="touch"><button class="glass" id="bTrick" aria-label="特技"><span data-i18n="b_trick">技</span></button><button class="glass pri" id="bJump" aria-label="跳"><span data-i18n="b_jump">跳</span></button><button class="glass" id="bBell" aria-label="打铃"><span data-i18n="b_bell">铃</span></button><button class="glass pri" id="bFish" aria-label="接鱼"><span data-i18n="b_fish">鱼</span></button></div>
 </div>
 
 <div class="glass pop" id="popSet" hidden>
@@ -317,6 +364,28 @@ html[lang="en"] .splash h2 { font-size: clamp(34px, 7vw, 54px); letter-spacing: 
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="glass recpill" id="recPill" hidden><i></i><span>REC</span><span id="recTime">0:15</span></div>
+<div class="result" id="result" hidden>
+  <div class="glass card">
+    <div class="rank" id="rRank"></div>
+    <div class="score" id="rScore">0</div>
+    <div class="best" id="rBest"></div>
+    <div class="rows">
+      <div><b id="rFish">0</b><span data-i18n="r_fish">接到的鱼</span></div>
+      <div><b id="rGold">0</b><span data-i18n="r_gold">金鱼</span></div>
+      <div><b id="rCombo">0</b><span data-i18n="r_combo">最高连击</span></div>
+      <div><b id="rStolen">0</b><span data-i18n="r_stolen">被海鸥抢走</span></div>
+    </div>
+    <img id="rImg" alt="">
+    <div class="go">
+      <a class="btn pri" id="rPost" target="_blank" rel="noopener" href="https://x.com/intent/post"><svg class="i fill" viewBox="0 0 24 24"><use href="#i-x"/></svg><span data-i18n="r_post">发到 X</span></a>
+      <button class="btn sec" id="rSave" data-i18n="r_save">保存成绩卡</button>
+      <button class="btn sec" id="rAgain" data-i18n="r_again">再来一次</button>
+      <button class="btn sec" id="rClose" data-i18n="r_close">继续闲逛</button>
+    </div>
+    <div class="note" data-i18n="r_note">先保存成绩卡，发 X 时把图片一起贴上效果最好</div>
+  </div>
+</div>
 <div class="glass ach-toast" id="achToast" role="status" aria-live="polite"><div class="badge"><svg class="i" viewBox="0 0 24 24"><use href="#i-trophy"/></svg></div><div><small data-i18n="unlocked">解锁成就</small><b id="achToastName"></b></div></div>
 
 <div class="splash" id="splash">
@@ -337,10 +406,13 @@ html[lang="en"] .splash h2 { font-size: clamp(34px, 7vw, 54px); letter-spacing: 
       <div><span><kbd>B</kbd></span><span data-i18n="k_bell">打铃</span></div>
       <div><span><kbd>C</kbd></span><span data-i18n="k_cam">切换镜头</span></div>
       <div><span><kbd>U</kbd></span><span data-i18n="k_hide">隐藏界面</span></div>
+      <div><span><kbd>G</kbd></span><span data-i18n="k_chal">挑战 60 秒</span></div>
+      <div><span><kbd>R</kbd></span><span data-i18n="k_rec">录制视频</span></div>
     </div>
     <div class="author"><span data-i18n="madeby">作品作者</span>
       <a href="https://x.com/yuhan119988" target="_blank" rel="noopener" data-follow><svg class="i fill" viewBox="0 0 24 24"><use href="#i-x"/></svg><b>Yuhan 钰涵</b><span>@yuhan119988</span></a>
     </div>
+    <div class="credit"><span data-i18n="credit">灵感来自 Simon Willison 的经典 AI 测试「画一只骑自行车的鹈鹕」</span> · <a href="https://x.com/simonw" target="_blank" rel="noopener">@simonw</a></div>
   </div>
 </div>
 
@@ -1195,13 +1267,14 @@ function applyTime(h) {
 }
 
 // ================= audio =================
+let masterComp = null;
 let actx = null, master = null, noiseBuf = null, windG = null, windF = null, waveG = null, musicG = null, sfxG = null;
 let musicOn = false, music = null;
 function initAudio() {
   if (actx) return actx;
   const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
   actx = new AC(); master = actx.createGain(); master.gain.value = .9;
-  const comp = actx.createDynamicsCompressor(); master.connect(comp).connect(actx.destination);
+  const comp = actx.createDynamicsCompressor(); master.connect(comp).connect(actx.destination); masterComp = comp;
   sfxG = actx.createGain(); sfxG.gain.value = 1; sfxG.connect(master);
   musicG = actx.createGain(); musicG.gain.value = 0; musicG.connect(master);
   noiseBuf = actx.createBuffer(1, actx.sampleRate * 2, actx.sampleRate);
@@ -1228,6 +1301,9 @@ const sfx = {
   land() { if (!actx) return; const t = actx.currentTime; noiseHit(t, .2, .5, 180, .8, 'lowpass'); tone(90, t, .2, .3, 'sine'); },
   trick() { if (!actx) return; const t = actx.currentTime; [660, 880, 1320].forEach((f, i) => tone(f, t + i * .07, .3, .08, 'triangle')); },
   ach() { if (!actx) return; const t = actx.currentTime; [784, 988, 1175, 1568].forEach((f, i) => tone(f, t + i * .09, .5, .07, 'sine')); },
+  gull() { if (!actx) return; const t = actx.currentTime; for (const k of [0, .2, .38]) { const o = tone(1500, t + k, .17, .05, 'sawtooth'); o.frequency.setValueAtTime(1600, t + k); o.frequency.exponentialRampToValueAtTime(820, t + k + .15); } },
+  ding(n) { if (!actx) return; const t = actx.currentTime; tone(880 * (1 + Math.min(n, 10) * .06), t, .3, .09, 'sine'); tone(1320 * (1 + Math.min(n, 10) * .06), t + .05, .25, .05, 'sine'); },
+  count(go) { if (!actx) return; tone(go ? 1320 : 660, actx.currentTime, go ? .5 : .2, .12, 'triangle'); },
   shutter() { if (!actx) return; const t = actx.currentTime; noiseHit(t, .06, .5, 3000, .6, 'highpass'); noiseHit(t + .08, .05, .35, 2500, .6, 'highpass'); }
 };
 // procedural lo-fi: Fmaj7 – Em7 – Dm7 – Cmaj9 at 84 bpm, soft keys + brushed beat + bass
@@ -1286,7 +1362,10 @@ const ACH = [
   ['cams', '导演', '用遍 5 种镜头'],
   ['photo', '摄影师', '拍一张照片'],
   ['music', '骑行歌单', '打开背景音乐'],
-  ['follow', '关注作者', '访问作者的 X 主页']
+  ['follow', '关注作者', '访问作者的 X 主页'],
+  ['chal', '挑战者', '完成一次 60 秒挑战'],
+  ['score30', '鹈鹕之王', '挑战得分 30 以上'],
+  ['gull', '护食', '打铃吓跑海鸥']
 ];
 const achDone = new Set(store.get('ach', []));
 const stats = Object.assign({ fish: 0, dist: 0, bells: 0, cams: [] }, store.get('stats', {}));
@@ -1324,12 +1403,12 @@ const I18N = {
     lead: '日落时分的海岸一号公路，一只戴着红头盔的鹈鹕骑上单车出门接鱼。跳跃、转体、翘头，把今天的晚饭装进车筐。',
     go: '开始骑行（含音乐）', go_quiet: '静音进入', go_back: '继续骑行',
     k_speed: '加速 / 刹车', k_steer: '变道', k_jump: '跳跃', k_trick: '特技', k_fish: '接鱼', k_bell: '打铃', k_cam: '切换镜头', k_hide: '隐藏界面',
-    madeby: '作品作者', kspace: '空格', b_trick: '技', b_jump: '跳', b_fish: '鱼',
+    madeby: '制作', kspace: '空格', b_bell: '铃', t_rec: '录制 15 秒视频', h_chal: '挑战', h_rec: '录像', k_chal: '挑战 60 秒', k_rec: '录制视频', chal_btn: '挑战 60 秒', c_score: '得分', c_combo: '连击', r_fish: '接到的鱼', r_gold: '金鱼', r_combo: '最高连击', r_stolen: '被海鸥抢走', r_post: '发到 X', r_save: '保存成绩卡', r_again: '再来一次', r_close: '继续闲逛', r_note: '先保存成绩卡，发 X 时把图片一起贴上效果最好', credit: '灵感来自 Simon Willison 的经典 AI 测试「画一只骑自行车的鹈鹕」', m_rec_start: '开始录制 15 秒', m_rec_done: '视频已保存', m_rec_webm: '视频已保存（WebM 格式，发 X 前需要转成 MP4）', m_norec: '这个浏览器不支持录像，试试电脑上的 Chrome', m_chal_hint: '开到鱼的下方用嘴接！金鱼要跳起来接', m_go: '开始！', m_gull: '海鸥来抢鱼了！快按 B 打铃', m_gull_touch: '海鸥来抢鱼了！快点「铃」', m_gull_scared: '海鸥被吓跑了！', m_gull_stole: '鱼被海鸥抢走了…', m_nof_chal: '挑战中要开到鱼下面用嘴接', ranks: ['新手鹈鹕', '熟练渔夫', '海岸快递员', '鹈鹕之王'], bestTxt: (n) => '个人最佳 ' + n, newBest: '新纪录！', x_text: (n) => '我在《鹈鹕骑车》60 秒接鱼挑战拿了 ' + n + ' 分 🐟🚲 你能超过我吗？\n作者 @yuhan119988', card_title: '60 秒接鱼挑战', card_cta: '来挑战我 →', card_pts: '分', card_stats: (f, g, c) => '接鱼 ' + f + '  ·  金鱼 ' + g + '  ·  最高连击 ' + c, b_trick: '技', b_jump: '跳', b_fish: '鱼',
     m_wheelie: '翘头！', m_bell: '叮叮！鹈鹕借过', m_spin: '360° 空中转体！', m_photo: '已保存照片', m_photo_fail: '这个浏览器不允许保存照片',
     m_copied: '链接已复制，快去分享', m_nofull: '当前浏览器不支持全屏', m_reset: '已重置', m_hint: '按 F 让鹈鹕接鱼', m_hint_touch: '点「鱼」让鹈鹕接鱼', m_paused: '已暂停', m_resumed: '继续骑行', m_lowq: '已自动调低画质以保持流畅',
     fish: ['好吃！', '入袋为安', '晚饭有着落了', '又一条！', '鹈鹕牌外卖', '手（嘴）气不错'], fishN: (n) => ' · 第 ' + n + ' 条',
     wm1: '鹈鹕骑车', share: '一只鹈鹕在日落海边骑单车 🚲 by @yuhan119988',
-    ach: [['第一条鱼', '接住第一条鱼'], ['渔夫鹈鹕', '累计接住 10 条鱼'], ['热身完毕', '骑行 1 公里'], ['环岛骑士', '骑行 5 公里'], ['风驰电掣', '速度达到 40 km/h'], ['起飞', '第一次跳跃'], ['空中转体', '在空中完成 360° 转体'], ['翘头', '在地面完成一次翘头'], ['借过借过', '打铃 10 次'], ['夜骑', '在 20:00 之后骑行'], ['追日出', '在日出时分骑行'], ['导演', '用遍 5 种镜头'], ['摄影师', '拍一张照片'], ['骑行歌单', '打开背景音乐'], ['关注作者', '访问作者的 X 主页']]
+    ach: [['第一条鱼', '接住第一条鱼'], ['渔夫鹈鹕', '累计接住 10 条鱼'], ['热身完毕', '骑行 1 公里'], ['环岛骑士', '骑行 5 公里'], ['风驰电掣', '速度达到 40 km/h'], ['起飞', '第一次跳跃'], ['空中转体', '在空中完成 360° 转体'], ['翘头', '在地面完成一次翘头'], ['借过借过', '打铃 10 次'], ['夜骑', '在 20:00 之后骑行'], ['追日出', '在日出时分骑行'], ['导演', '用遍 5 种镜头'], ['摄影师', '拍一张照片'], ['骑行歌单', '打开背景音乐'], ['关注作者', '访问作者的 X 主页'], ['挑战者', '完成一次 60 秒挑战'], ['鹈鹕之王', '挑战得分 30 以上'], ['护食', '打铃吓跑海鸥']]
   },
   en: {
     doc: 'Pelican on a Bike · 鹈鹕骑车', title: 'Pelican on a Bike', sub: '鹈鹕骑车 · Real-time 3D', eyebrow: '鹈鹕骑车 · A tiny 3D road trip',
@@ -1342,12 +1421,12 @@ const I18N = {
     lead: 'Sunset on Coast Road One. A pelican in a red helmet hops on a bike to go fishing. Jump, spin, pop wheelies, and fill the basket with dinner.',
     go: 'Start riding (with music)', go_quiet: 'Enter muted', go_back: 'Keep riding',
     k_speed: 'Speed / Brake', k_steer: 'Steer', k_jump: 'Jump', k_trick: 'Trick', k_fish: 'Catch fish', k_bell: 'Bell', k_cam: 'Camera', k_hide: 'Hide UI',
-    madeby: 'Made by', kspace: 'Space', b_trick: 'Trick', b_jump: 'Jump', b_fish: 'Fish',
+    madeby: 'Made by', kspace: 'Space', b_bell: 'Bell', t_rec: 'Record a 15s video', h_chal: 'Challenge', h_rec: 'Record', k_chal: '60s challenge', k_rec: 'Record video', chal_btn: '60s challenge', c_score: 'SCORE', c_combo: 'COMBO', r_fish: 'Fish caught', r_gold: 'Golden', r_combo: 'Best combo', r_stolen: 'Stolen by gulls', r_post: 'Post on X', r_save: 'Save score card', r_again: 'Play again', r_close: 'Keep cruising', r_note: 'Save the score card first and attach it to your post', credit: 'Inspired by Simon Willison\u2019s classic AI test: \u201ca pelican riding a bicycle\u201d', m_rec_start: 'Recording 15 seconds', m_rec_done: 'Video saved', m_rec_webm: 'Video saved as WebM (convert to MP4 before posting on X)', m_norec: "This browser can't record video. Try desktop Chrome.", m_chal_hint: 'Ride under the fish to catch them! Jump for the golden ones', m_go: 'Go!', m_gull: 'A gull is after your fish! Ring the bell (B)', m_gull_touch: 'A gull is after your fish! Tap Bell', m_gull_scared: 'Scared it off!', m_gull_stole: 'The gull stole a fish…', m_nof_chal: 'In the challenge, ride under the fish and catch them', ranks: ['Rookie pelican', 'Seasoned fisher', 'Coast courier', 'Pelican King'], bestTxt: (n) => 'Personal best ' + n, newBest: 'New record!', x_text: (n) => 'I scored ' + n + ' in the 60-second Pelican on a Bike challenge 🐟🚲 Can you beat me?\nby @yuhan119988', card_title: '60-SECOND FISH CHALLENGE', card_cta: 'Beat my score →', card_pts: 'pts', card_stats: (f, g, c) => f + ' fish  ·  ' + g + ' golden  ·  best combo ' + c, b_trick: 'Trick', b_jump: 'Jump', b_fish: 'Fish',
     m_wheelie: 'Wheelie!', m_bell: 'Ring ring! Pelican coming through', m_spin: '360° spin!', m_photo: 'Photo saved', m_photo_fail: "This browser can't save photos",
     m_copied: 'Link copied, go share it', m_nofull: "Fullscreen isn't supported here", m_reset: 'Progress reset', m_hint: 'Press F to catch a fish', m_hint_touch: 'Tap Fish to catch one', m_paused: 'Paused', m_resumed: 'Riding again', m_lowq: 'Lowered quality to keep it smooth',
     fish: ['Yum!', 'Into the pouch', 'Dinner is sorted', 'Another one!', 'Pelican Express', 'Lucky beak'], fishN: (n) => ' · fish #' + n,
     wm1: 'Pelican on a Bike', share: 'A pelican riding a bike along a sunset coast 🚲 by @yuhan119988',
-    ach: [['First catch', 'Catch your first fish'], ['Fisher pelican', 'Catch 10 fish'], ['Warmed up', 'Ride 1 km'], ['Coast rider', 'Ride 5 km'], ['Need for speed', 'Hit 40 km/h'], ['Liftoff', 'Jump for the first time'], ['Air spin', 'Land a 360° spin'], ['Wheelie', 'Pop a wheelie on the ground'], ['Coming through', 'Ring the bell 10 times'], ['Night owl', 'Ride after 20:00'], ['Sunrise chaser', 'Ride at sunrise'], ['Director', 'Try all 5 cameras'], ['Photographer', 'Take a photo'], ['Playlist', 'Turn on the music'], ['Fan club', "Visit the author's X profile"]]
+    ach: [['First catch', 'Catch your first fish'], ['Fisher pelican', 'Catch 10 fish'], ['Warmed up', 'Ride 1 km'], ['Coast rider', 'Ride 5 km'], ['Need for speed', 'Hit 40 km/h'], ['Liftoff', 'Jump for the first time'], ['Air spin', 'Land a 360° spin'], ['Wheelie', 'Pop a wheelie on the ground'], ['Coming through', 'Ring the bell 10 times'], ['Night owl', 'Ride after 20:00'], ['Sunrise chaser', 'Ride at sunrise'], ['Director', 'Try all 5 cameras'], ['Photographer', 'Take a photo'], ['Playlist', 'Turn on the music'], ['Fan club', "Visit the author's X profile"], ['Challenger', 'Finish a 60-second challenge'], ['Pelican King', 'Score 30+ in a challenge'], ['Guard the catch', 'Scare off a gull with the bell']]
   }
 };
 let lang = (() => {
@@ -1378,6 +1457,7 @@ let toastTimer = 0;
 function toast(msg, ms = 1500) { const el = $('#toast'); el.textContent = msg; el.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), ms); }
 
 function catchFish() {
+  if (chal.active || chal.countdown > 0) { toast(T('m_nof_chal')); return; }
   if (fishFlight.active) return;
   fishFlight.from.set(rr(10, 13), SEA_Y, rr(3, 6));
   fishFlight.active = true; fishFlight.t = 0; flyFish.visible = true;
@@ -1390,7 +1470,11 @@ function doTrick() {
   if (airborne) { if (spinT <= 0) { spinT = .62; sfx.trick(); } }
   else if (wheelieT <= 0) { wheelieT = 1.6; sfx.trick(); unlock('wheelie'); toast(T('m_wheelie')); }
 }
-function ringBell() { bellT = .7; lookT = 1.4; waveT = 1.6; sfx.bell(); stats.bells++; if (stats.bells >= 10) unlock('bell'); toast(T('m_bell')); }
+function ringBell() {
+  bellT = .7; lookT = 1.4; waveT = 1.6; sfx.bell(); stats.bells++; if (stats.bells >= 10) unlock('bell');
+  if (th.active && th.phase === 'in') { th.phase = 'flee'; th.t = 0; th.from.copy(thief.g.position); unlock('gull'); toast(T('m_gull_scared')); if (chal.active) { chal.score += 1; } }
+  else toast(T('m_bell'));
+}
 const CAMS = ['free', 'follow', 'side', 'cine', 'pov'];
 const CAM_NAMES = { free: '自由环绕', follow: '追随', side: '侧面跟拍', cine: '电影运镜', pov: '鹈鹕视角' };
 let controls = null;
@@ -1458,7 +1542,7 @@ $$('#qSeg button').forEach((b) => b.addEventListener('click', () => setQuality(b
 $('#swBloom').addEventListener('click', () => { settings.bloom = !settings.bloom; store.set('bloom', settings.bloom); $('#swBloom').setAttribute('aria-checked', settings.bloom); usePost = applyRenderMode(); });
 $('#swTime').addEventListener('click', () => { settings.autoTime = !settings.autoTime; $('#swTime').setAttribute('aria-checked', settings.autoTime); });
 $('#swSfx').addEventListener('click', () => setSfx(!settings.sfx));
-$('#btnReset').addEventListener('click', () => { achDone.clear(); stats.fish = 0; stats.dist = 0; stats.bells = 0; camsUsed.clear(); store.set('ach', []); saveStats(); renderAch(); basketFish.forEach((f) => { f.visible = false; }); toast(T('m_reset')); });
+$('#btnReset').addEventListener('click', () => { achDone.clear(); stats.fish = 0; stats.dist = 0; stats.bells = 0; camsUsed.clear(); store.set('ach', []); store.set('best', 0); saveStats(); renderAch(); setBasket(0); toast(T('m_reset')); });
 function hold(btn, on, off) { btn.addEventListener('pointerdown', (e) => { e.preventDefault(); on(); btn.setPointerCapture?.(e.pointerId); }); ['pointerup', 'pointercancel', 'lostpointercapture'].forEach((ev) => btn.addEventListener(ev, off)); }
 hold($('#sL'), () => { steerIn = 1; }, () => { steerIn = 0; });
 hold($('#sR'), () => { steerIn = -1; }, () => { steerIn = 0; });
@@ -1485,7 +1569,7 @@ addEventListener('keydown', (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   const k = e.key.toLowerCase();
   if (!state.started) { if (k === 'enter' || k === ' ') { e.preventDefault(); begin(true); } return; }
-  if (k === 'escape') { $$('.pop').forEach((p) => { p.hidden = true; }); return; }
+  if (k === 'escape') { $$('.pop').forEach((p) => { p.hidden = true; }); $('#result').hidden = true; return; }
   if (e.target.tagName === 'INPUT' && e.target.type === 'range' && k.startsWith('arrow')) return;
   if (k === ' ') { e.preventDefault(); if (!e.repeat) doJump(); }
   else if (k === 't' && !e.repeat) doTrick();
@@ -1496,11 +1580,175 @@ addEventListener('keydown', (e) => {
   else if (k === 'p' && !e.repeat) { paused = !paused; toast(paused ? T('m_paused') : T('m_resumed')); }
   else if (k === 'm' && !e.repeat) (musicOn ? stopMusic() : startMusic());
   else if (k === 'k' && !e.repeat) takePhoto();
+  else if (k === 'g' && !e.repeat) startChallenge();
+  else if (k === 'r' && !e.repeat) startRec();
   else if ('12345'.includes(k) && k.length === 1) setCam(CAMS[+k - 1]);
   else if (['w', 's', 'a', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(k)) { e.preventDefault(); keys.add(k); }
 });
 addEventListener('keyup', (e) => keys.delete(e.key.toLowerCase()));
 addEventListener('blur', () => keys.clear());
+
+
+// ================= basket, floating fish, gull thief, challenge, recording =================
+let basketCount = 0;
+function setBasket(n) { basketCount = clamp(n, 0, basketFish.length); basketFish.forEach((f, i) => { f.visible = i < basketCount; }); }
+function download(blob, name) { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 8000); }
+
+const ringTex = canvasTex(128, 128, (g) => { const gr = g.createRadialGradient(64, 64, 26, 64, 64, 63); gr.addColorStop(0, 'rgba(255,255,255,0)'); gr.addColorStop(.55, 'rgba(255,255,255,1)'); gr.addColorStop(.72, 'rgba(255,255,255,.35)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); }, 1, 1, false);
+ringTex.wrapS = ringTex.wrapT = THREE.ClampToEdgeWrapping;
+const goldMat = std('#ffd04a', { metalness: .85, roughness: .22, emissive: C('#ff9a20'), emissiveIntensity: .8 });
+const silverMat = std('#d6ecf6', { metalness: .55, roughness: .28, emissive: C('#4fb6dc'), emissiveIntensity: .55 });
+const tpool = [];
+for (let i = 0; i < 10; i++) {
+  const m = makeFish(); m.scale.setScalar(1.7); m.visible = false;
+  m.traverse((c) => { if (c.isMesh) c.userData.orig = c.material; });
+  const ring = new THREE.Mesh(new THREE.CircleGeometry(.62, 40).rotateX(-Math.PI / 2), new THREE.MeshBasicMaterial({ map: ringTex, color: 0xffffff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
+  const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: dotTex, color: 0xffffff, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
+  glow.scale.set(.8, .8, 1);
+  ring.visible = glow.visible = false;
+  scene.add(m, ring, glow);
+  tpool.push({ m, ring, glow, active: false, gold: false, x: 0, z: 0, h: 0, phase: '', t: 0, from: new V3(), prev: new V3() });
+}
+let spawnT = 4;
+function spawnTarget(gold) {
+  const tg = tpool.find((p) => !p.active); if (!tg) return;
+  tg.active = true; tg.gold = gold; tg.phase = 'leap'; tg.t = 0;
+  tg.x = clamp(lane + rr(-2.6, 2.6), -2.8, 3.0); tg.z = rr(30, 38); tg.h = gold ? 2.55 : 1.74;
+  tg.from.set(rr(10, 14), SEA_Y, tg.z + rr(2, 6));
+  tg.m.traverse((c) => { if (c.isMesh) c.material = gold ? goldMat : silverMat; });
+  tg.ring.material.color.copy(gold ? C('#ffc040') : C('#7fe8ff'));
+  tg.glow.material.color.copy(gold ? C('#ffb030') : C('#9feeff'));
+  tg.m.visible = tg.ring.visible = tg.glow.visible = true;
+  tg.m.position.copy(tg.from);
+  doSplash(tg.from, 40, .9); sfx.splash();
+}
+function clearTargets() { for (const tg of tpool) { tg.active = false; tg.m.visible = tg.ring.visible = tg.glow.visible = false; } }
+
+const chal = { active: false, countdown: 0, lastCount: 0, t: 0, score: 0, combo: 0, best: 0, fish: 0, gold: 0, stolen: 0, gullAt: [] };
+const comboMult = () => Math.min(4, 1 + Math.floor(Math.max(chal.combo - 1, 0) / 4));
+function onTargetCaught(gold) {
+  stats.fish++; pouchBulge = 1; sfx.gulp(); setBasket(basketCount + 1);
+  unlock('first'); if (stats.fish >= 10) unlock('fish10');
+  if (chal.active) {
+    chal.combo++; chal.best = Math.max(chal.best, chal.combo); chal.fish++; if (gold) chal.gold++;
+    const mult = comboMult(), pts = (gold ? 3 : 1) * mult; chal.score += pts;
+    toast('+' + pts + (mult > 1 ? '   ×' + mult : ''), 700); sfx.ding(chal.combo);
+  } else { const lines = T('fish'); toast(lines[stats.fish % lines.length] + T('fishN')(stats.fish)); }
+  saveStats();
+}
+function startChallenge() {
+  if (chal.active || chal.countdown > 0) return;
+  $('#result').hidden = true; $$('.pop').forEach((p) => { p.hidden = true; });
+  clearTargets(); fishFlight.active = false; flyFish.visible = false;
+  Object.assign(chal, { countdown: 3.3, lastCount: 4, t: 60, score: 0, combo: 0, best: 0, fish: 0, gold: 0, stolen: 0, gullAt: [47, 30, 13] });
+  setBasket(0);
+  if (state.targetKmh < 18) state.targetKmh = 22;
+  $('#chalBar').hidden = false;
+}
+let wantCard = false, cardURL = '';
+function endChallenge() {
+  chal.active = false; clearTargets(); $('#chalBar').hidden = true;
+  unlock('chal'); if (chal.score >= 30) unlock('score30');
+  const prev = store.get('best', 0); chal.newBest = chal.score > prev; if (chal.newBest) store.set('best', chal.score); chal.prevBest = Math.max(prev, chal.score);
+  wantCard = true;
+}
+function makeCard() {
+  const W = 1200, H = 630, c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+  const sw = canvas.width, sh = canvas.height, ar = W / H; let cw = sw, ch = sw / ar; if (ch > sh) { ch = sh; cw = sh * ar; }
+  g.drawImage(canvas, (sw - cw) / 2, (sh - ch) / 2, cw, ch, 0, 0, W, H);
+  const gr = g.createLinearGradient(0, 0, W * .66, 0); gr.addColorStop(0, 'rgba(26,13,40,.92)'); gr.addColorStop(.7, 'rgba(26,13,40,.55)'); gr.addColorStop(1, 'rgba(26,13,40,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  const rank = T('ranks')[chal.score >= 30 ? 3 : chal.score >= 20 ? 2 : chal.score >= 10 ? 1 : 0];
+  g.textAlign = 'left'; g.textBaseline = 'alphabetic';
+  g.fillStyle = '#ffc46e'; g.font = '700 24px Outfit, "Noto Sans SC", sans-serif'; g.fillText(T('card_title'), 64, 92);
+  g.fillStyle = '#fff6e6'; g.font = '900 54px "Noto Sans SC", Outfit, sans-serif'; g.fillText(T('title'), 64, 156);
+  const sg = g.createLinearGradient(0, 200, 0, 380); sg.addColorStop(0, '#fff6e6'); sg.addColorStop(1, '#ffb45c');
+  g.fillStyle = sg; g.font = '700 190px Outfit, sans-serif'; g.fillText(String(chal.score), 56, 372);
+  const sw2 = g.measureText(String(chal.score)).width;
+  g.fillStyle = 'rgba(255,240,225,.8)'; g.font = '600 34px Outfit, "Noto Sans SC", sans-serif'; g.fillText(T('card_pts'), 72 + sw2, 372);
+  g.fillStyle = '#ffd88f'; g.font = '700 30px "Noto Sans SC", Outfit, sans-serif'; g.fillText(rank, 64, 428);
+  g.fillStyle = 'rgba(255,240,225,.82)'; g.font = '500 24px "Noto Sans SC", Outfit, sans-serif'; g.fillText(T('card_stats')(chal.fish, chal.gold, chal.best), 64, 472);
+  g.fillStyle = 'rgba(255,255,255,.14)'; g.fillRect(64, 516, 520, 1);
+  g.fillStyle = '#fff6e6'; g.font = '700 24px Outfit, "Noto Sans SC", sans-serif'; g.fillText(T('card_cta') + '  yuhan9988.github.io/pelican-ride', 64, 560);
+  g.fillStyle = 'rgba(255,240,225,.7)'; g.font = '500 20px Outfit, "Noto Sans SC", sans-serif'; g.fillText('by Yuhan 钰涵 · X @yuhan119988', 64, 592);
+  return c;
+}
+function showResult() {
+  const c = makeCard(); cardURL = c.toDataURL('image/png'); $('#rImg').src = cardURL;
+  $('#rRank').textContent = T('ranks')[chal.score >= 30 ? 3 : chal.score >= 20 ? 2 : chal.score >= 10 ? 1 : 0];
+  $('#rScore').textContent = chal.score;
+  const b = $('#rBest'); b.textContent = chal.newBest ? T('newBest') : T('bestTxt')(chal.prevBest); b.classList.toggle('new', !!chal.newBest);
+  $('#rFish').textContent = chal.fish; $('#rGold').textContent = chal.gold; $('#rCombo').textContent = chal.best; $('#rStolen').textContent = chal.stolen;
+  const base = 'https://yuhan9988.github.io/pelican-ride/', url = lang === 'en' ? base + '?lang=en' : base;
+  $('#rPost').href = 'https://x.com/intent/post?text=' + encodeURIComponent(T('x_text')(chal.score)) + '&url=' + encodeURIComponent(url);
+  $('#result').hidden = false; sfx.ach();
+}
+$('#rSave').addEventListener('click', () => { if (!cardURL) return; fetch(cardURL).then((r) => r.blob()).then((b) => download(b, 'pelican-ride-score-' + chal.score + '.png')); });
+$('#rAgain').addEventListener('click', startChallenge);
+$('#rClose').addEventListener('click', () => { $('#result').hidden = true; canvas.focus({ preventScroll: true }); });
+$('#btnChal').addEventListener('click', () => { if (!state.started) begin(false); startChallenge(); });
+
+// gull thief: swoops at the basket, the bell scares it off
+function buildGull() {
+  const g = new THREE.Group(); blob(new V3(), .06, .06, .2, gullMat, g);
+  blob(new V3(0, .03, .2), .04, .04, .05, gullMat, g);
+  const bk = new THREE.Mesh(new THREE.ConeGeometry(.012, .07, 6), std('#f2b03a')); bk.rotation.x = Math.PI / 2; bk.position.set(0, .02, .27); g.add(bk);
+  const wings = [];
+  for (const s of [-1, 1]) {
+    const piv = new THREE.Group(); g.add(piv);
+    const w = new THREE.Mesh(new THREE.BoxGeometry(.5, .012, .16), gullMat); w.position.x = s * .27; piv.add(w);
+    const piv2 = new THREE.Group(); piv2.position.x = s * .52; piv.add(piv2);
+    const tip = new THREE.Mesh(new THREE.BoxGeometry(.32, .012, .12), gullTip); tip.position.x = s * .16; piv2.add(tip);
+    wings.push({ piv, piv2, s });
+  }
+  return { g, wings };
+}
+const thief = buildGull(); thief.g.scale.setScalar(2.2); thief.g.visible = false; shadowAll(thief.g); scene.add(thief.g);
+const thiefFish = makeFish(); thiefFish.scale.setScalar(.5); thiefFish.position.set(0, -.08, .15); thiefFish.rotation.z = Math.PI / 2; thiefFish.visible = false; thief.g.add(thiefFish);
+const th = { active: false, phase: '', t: 0, from: new V3(), cool: 40 };
+function startThief() {
+  if (th.active) return; if (!chal.active && basketCount === 0) return;
+  th.active = true; th.phase = 'in'; th.t = 0; th.from.set(lane + 14, 9, 20);
+  thief.g.position.copy(th.from); thief.g.visible = true; thiefFish.visible = false;
+  toast(T(isTouch ? 'm_gull_touch' : 'm_gull'), 2600); sfx.gull();
+}
+
+// 15-second clip recorder (canvas + game audio, watermarked)
+let rec = null, recDest = null;
+const recCanvas = document.createElement('canvas'), rctx = recCanvas.getContext('2d');
+function pickMime() {
+  if (!window.MediaRecorder) return null;
+  return ['video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4;codecs=avc1,mp4a.40.2', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'].find((m) => { try { return MediaRecorder.isTypeSupported(m); } catch (e) { return false; } }) || null;
+}
+function drawRecFrame() {
+  const w = recCanvas.width, h = recCanvas.height; rctx.drawImage(canvas, 0, 0, w, h);
+  const s = Math.max(.6, w / 1280);
+  rctx.save(); rctx.textAlign = 'right'; rctx.shadowColor = 'rgba(0,0,0,.45)'; rctx.shadowBlur = 10 * s;
+  rctx.fillStyle = '#fff6e6'; rctx.font = `900 ${24 * s}px "Noto Sans SC", Outfit, sans-serif`; rctx.fillText(T('wm1'), w - 26 * s, h - 50 * s);
+  rctx.fillStyle = 'rgba(255,240,225,.9)'; rctx.font = `600 ${15 * s}px Outfit, sans-serif`; rctx.fillText('X @yuhan119988 · yuhan9988.github.io/pelican-ride', w - 26 * s, h - 26 * s);
+  rctx.restore();
+}
+function startRec() {
+  if (rec) { stopRec(); return; }
+  const mime = pickMime();
+  if (!mime || !recCanvas.captureStream) { toast(T('m_norec'), 2600); return; }
+  const sc = Math.min(1, 1280 / canvas.width);
+  recCanvas.width = Math.round(canvas.width * sc / 2) * 2; recCanvas.height = Math.round(canvas.height * sc / 2) * 2;
+  drawRecFrame();
+  const stream = recCanvas.captureStream(30);
+  if (initAudio()) { actx.resume(); if (!recDest) { recDest = actx.createMediaStreamDestination(); masterComp.connect(recDest); } recDest.stream.getAudioTracks().forEach((tr) => stream.addTrack(tr)); }
+  let mr;
+  try { mr = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 8000000 }); }
+  catch (e) { try { stream.getAudioTracks().forEach((tr) => stream.removeTrack(tr)); mr = new MediaRecorder(stream, { mimeType: mime }); } catch (e2) { toast(T('m_norec'), 2600); return; } }
+  const chunks = [];
+  mr.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+  mr.onstop = () => { const type = mime.split(';')[0]; const ext = type.includes('mp4') ? 'mp4' : 'webm'; download(new Blob(chunks, { type }), 'pelican-ride-' + Date.now() + '.' + ext); toast(T(ext === 'mp4' ? 'm_rec_done' : 'm_rec_webm'), 3200); };
+  try { mr.start(200); } catch (e) { toast(T('m_norec'), 2600); return; }
+  rec = { mr, t: 0 }; $('#tRec').classList.add('recording'); $('#recPill').hidden = false; toast(T('m_rec_start'));
+}
+function stopRec() { if (!rec) return; const r = rec; rec = null; try { r.mr.stop(); } catch (e) {} $('#tRec').classList.remove('recording'); $('#recPill').hidden = true; }
+$('#tRec').addEventListener('click', startRec);
+$('#bBell').addEventListener('pointerdown', (e) => { e.preventDefault(); ringBell(); });
 
 // ================= main loop =================
 const clock = new THREE.Clock();
@@ -1664,12 +1912,83 @@ function frame() {
     if (fishFlight.t >= 1) {
       fishFlight.active = false; flyFish.visible = false; pouchBulge = 1; stats.fish++;
       sfx.gulp();
-      basketFish[(stats.fish - 1) % basketFish.length].visible = true;
+      setBasket(basketCount + 1);
       const lines = T('fish');
       toast(lines[stats.fish % lines.length] + T('fishN')(stats.fish));
       unlock('first'); if (stats.fish >= 10) unlock('fish10');
       saveStats();
     }
+  }
+
+  // --- challenge clock
+  if (chal.countdown > 0) {
+    chal.countdown -= rdt;
+    const n = Math.ceil(chal.countdown);
+    if (n !== chal.lastCount && n > 0) { chal.lastCount = n; toast(String(n), 800); sfx.count(false); }
+    if (chal.countdown <= 0) { chal.active = true; spawnT = .4; toast(T('m_go'), 700); sfx.count(true); setTimeout(() => { if (chal.active) toast(T('m_chal_hint'), 2600); }, 800); }
+  }
+  if (chal.active && !paused) {
+    chal.t -= dt;
+    if (chal.gullAt.length && chal.t <= chal.gullAt[0]) { chal.gullAt.shift(); startThief(); }
+    if (chal.t <= 0) { chal.t = 0; endChallenge(); }
+  }
+  // --- floating fish: ride under them, jump for the golden ones
+  if (state.started && !paused && chal.countdown <= 0) {
+    spawnT -= dt;
+    if (spawnT <= 0) { if (chal.active) { spawnTarget(rnd() < .25); spawnT = rr(1.1, 1.8); } else { spawnTarget(rnd() < .15); spawnT = rr(5, 9); } }
+  }
+  jaw.localToWorld(mouthW.set(0, .02, .3));
+  for (const tg of tpool) {
+    if (!tg.active) continue;
+    tg.z -= dz; tg.from.z -= dz; tg.t += dt;
+    let ringA = 0;
+    if (tg.phase === 'leap') {
+      const k = Math.min(tg.t / 1.1, 1), a = (1 - k) * (1 - k), b = 2 * (1 - k) * k, c = k * k;
+      const mx = (tg.from.x + tg.x) / 2, my = Math.max(tg.from.y, tg.h) + 2.4, mz = (tg.from.z + tg.z) / 2;
+      tg.prev.copy(tg.m.position);
+      tg.m.position.set(a * tg.from.x + b * mx + c * tg.x, a * tg.from.y + b * my + c * tg.h, a * tg.from.z + b * mz + c * tg.z);
+      if (k > .02) tg.m.lookAt(tmpV.copy(tg.m.position).multiplyScalar(2).sub(tg.prev));
+      ringA = k;
+      if (k >= 1) { tg.phase = 'hover'; tg.t = 0; }
+    } else if (tg.phase === 'hover') {
+      tg.m.position.set(tg.x, tg.h + Math.sin(t * 4 + tg.x) * .07, tg.z);
+      tg.m.rotation.set(Math.sin(t * 5) * .15, t * 2.4, Math.sin(t * 6) * .2);
+      ringA = .75 + .25 * Math.sin(t * 6);
+      if (Math.abs(tg.z - mouthW.z) < .65 && Math.abs(tg.x - mouthW.x) < .58 && Math.abs(tg.h - mouthW.y) < .55) { tg.phase = 'eat'; tg.t = 0; tg.from.copy(tg.m.position); beakOpenT = .5; }
+      else if (tg.z < -2.5) { tg.active = false; tg.m.visible = tg.ring.visible = tg.glow.visible = false; if (chal.active) chal.combo = 0; }
+    } else if (tg.phase === 'eat') {
+      const k = Math.min(tg.t / .2, 1); tg.m.position.lerpVectors(tg.from, mouthW, k); tg.m.scale.setScalar(1.7 * (1 - k * .5));
+      if (k >= 1) { tg.active = false; tg.m.visible = tg.ring.visible = tg.glow.visible = false; tg.m.scale.setScalar(1.7); onTargetCaught(tg.gold); }
+    }
+    tg.ring.position.set(tg.x, .045, tg.z); tg.ring.material.opacity = ringA * .9; tg.ring.scale.setScalar(1 + Math.sin(t * 5) * .06);
+    tg.glow.position.copy(tg.m.position); tg.glow.material.opacity = (tg.phase === 'hover' ? .35 : .2) * (tg.gold ? 1.3 : 1);
+  }
+  // --- gull thief
+  if (state.started && !th.active && !chal.active && !paused) { th.cool -= dt; if (th.cool <= 0) { th.cool = rr(35, 60); startThief(); } }
+  if (th.active) {
+    th.t += dt;
+    basket.getWorldPosition(basketW);
+    const G = thief.g;
+    let flap = 14;
+    if (th.phase === 'in') {
+      const k = Math.min(th.t / 3.4, 1), e = k * k * (3 - 2 * k);
+      tmpV2.copy(basketW).add(tmpV.set(0, .45, .1));
+      G.position.lerpVectors(th.from, tmpV2, e); G.position.y += Math.sin(k * Math.PI) * 1.6;
+      G.lookAt(tmpV2); flap = k > .7 ? 22 : 10;
+      if (k >= 1) {
+        th.phase = 'away'; th.t = 0; th.from.copy(G.position);
+        if (basketCount > 0 || chal.active) { thiefFish.visible = basketCount > 0 || chal.active; setBasket(basketCount - 1); }
+        if (chal.active) { chal.score = Math.max(0, chal.score - 2); chal.stolen++; chal.combo = 0; }
+        sfx.gull(); toast(T('m_gull_stole'), 1600);
+      }
+    } else {
+      const k = Math.min(th.t / 2.4, 1), e = k * k;
+      tmpV2.set(lane + (th.phase === 'flee' ? 16 : -14), 16, th.phase === 'flee' ? 26 : -30);
+      G.position.lerpVectors(th.from, tmpV2, e); G.lookAt(tmpV2); flap = th.phase === 'flee' ? 26 : 16;
+      if (k >= 1) { th.active = false; G.visible = false; thiefFish.visible = false; th.cool = rr(35, 60); }
+    }
+    const f = Math.sin(t * flap) * .7;
+    for (const w of thief.wings) { w.piv.rotation.z = w.s * f; w.piv2.rotation.z = w.s * f * .6; }
   }
   for (const f of ambientFish) {
     if (f.t >= 1) { f.cool -= dt; if (f.cool <= 0 && state.started) { f.t = 0; f.from.set(rr(14, 40), SEA_Y, rr(4, 40)); f.to.copy(f.from).add(new V3(rr(-2, 2), 0, rr(2, 5))); f.m.visible = true; doSplash(f.from, 25, .7); } continue; }
@@ -1756,6 +2075,7 @@ function frame() {
     $('#vGear').textContent = gear;
     $('#vDist').textContent = (stats.dist / 1000).toFixed(2);
     $('#vFish').textContent = stats.fish;
+    if (chal.active || chal.countdown > 0) { const tm = $('#cTime'); tm.textContent = Math.ceil(chal.active ? chal.t : 60); tm.classList.toggle('low', chal.active && chal.t <= 10); $('#cScore').textContent = chal.score; $('#cCombo').textContent = '×' + comboMult(); }
     if (!settings.autoTime) $('#vTime').textContent = fmtTime(state.tod);
   }
 
@@ -1763,6 +2083,8 @@ function frame() {
   if (gradePass) gradePass.uniforms.time.value = t;
   if (usePost) composer.render(rdt); else renderer.render(scene, camera);
   if (wantPhoto) finishPhoto();
+  if (wantCard) { wantCard = false; showResult(); }
+  if (rec) { drawRecFrame(); rec.t += rdt; $('#recTime').textContent = '0:' + String(Math.max(0, Math.ceil(15 - rec.t))).padStart(2, '0'); if (rec.t >= 15) stopRec(); }
 
   // adaptive quality: drop a notch if the device struggles
   if (state.started && settings.quality !== 'low') { if (fps < 30) lowFpsT += rdt; else lowFpsT = Math.max(0, lowFpsT - rdt); if (lowFpsT > 4) { lowFpsT = 0; setQuality(settings.quality === 'high' ? 'mid' : 'low'); toast(T('m_lowq')); } }
@@ -1794,7 +2116,7 @@ renderer.shadowMap.enabled = settings.quality !== 'low';
 usePost = applyRenderMode();
 resize();
 renderAch();
-for (let i = 0; i < Math.min(stats.fish, basketFish.length); i++) basketFish[i].visible = true;
+setBasket(stats.fish);
 todIn.value = state.tod; $('#vTime').textContent = fmtTime(state.tod);
 applyTime(state.tod);
 updatePosts();
@@ -1803,7 +2125,7 @@ camera.position.set(lane - 3.6, 1.5, 3.4);
 if (controls) { controls.target.set(lane, 1.0, 0); controls.update(); }
 applyLang();
 $('#tLang').addEventListener('click', () => { lang = lang === 'zh' ? 'en' : 'zh'; store.set('lang', lang); applyLang(); });
-window.__pelican = { setCam, setTime: (h) => { state.tod = h; todIn.value = h; applyTime(h); }, catchFish, doJump, doTrick, begin, state, stats, get fps() { return fps; } };
+window.__pelican = { setCam, setTime: (h) => { state.tod = h; todIn.value = h; applyTime(h); }, catchFish, doJump, doTrick, begin, state, stats, startChallenge, startRec, stopRec, chal, spawnTarget, startThief, ringBell, endNow: () => { chal.t = .05; }, targets: () => tpool.map((p) => ({ active: p.active, phase: p.phase, x: p.x, z: p.z, gold: p.gold })), setLane: (x) => { lane = x; }, get fps() { return fps; } };
 requestAnimationFrame(frame);
 })();
 </script>
